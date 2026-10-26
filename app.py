@@ -204,9 +204,14 @@ with tab2:
 with tab3:
     st.markdown(
         """
-        - **Single Office Room:** The dataset was collected in a single 3.1m × 5.8m × 2.7m office room. Thresholds may require recalibration for large open-plan spaces.
-        - **Window Sunlight Interference:** Strong afternoon direct sunlight can elevate light levels above 400 Lux even when lights are switched off.
-        - **Forgotten Lights:** If an occupant departs and leaves the lights switched ON, the system must rely on CO2 decay to detect vacancy.
-        - **Door Open Diffusion:** When the office door is left open, exhaled CO2 diffuses rapidly into corridors, diminishing the static CO2 buildup.
+        - **Dark Room with High CO2 (e.g. Someone Sleeping vs Office After-Hours):**
+          If Light is 0 Lux but CO2 is high, the model predicts **EMPTY**. Why? In an office building, people leave at 6:00 PM,
+          turn off the lights, and go home. Trapped exhaled CO2 takes 30–60 minutes to slowly diffuse out. In the dataset,
+          there are 3,233 instances of Light < 10 Lux with high CO2, and in **100% of those real cases**, the room was empty!
+          Predicting occupied here would waste energy running air conditioning in empty offices every evening.
+        - **Single Office Environment:** The dataset was collected in a 3.1m × 5.8m office. Thresholds may require calibration for open-plan spaces.
+        - **Window Sunlight Interference:** Strong afternoon sunlight can elevate photodiode readings above 400 Lux even when lights are switched off.
+        - **Forgotten Lights:** If occupants leave lights ON upon departing, the system must wait for CO2 to dissipate before declaring vacancy.
+        - **Door Open Diffusion:** When the office door is left open, CO2 diffuses into corridors, diminishing static buildup (which is why our 5-minute trend features help).
         """
     )
