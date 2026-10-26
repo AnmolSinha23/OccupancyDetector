@@ -1,0 +1,32 @@
+============================================================
+EXPLAINABLE DECISION TREE RULES (export_text)
+Dataset: UCI Occupancy Detection (datatraining.txt)
+============================================================
+
+|--- Light <= 365.12
+|   |--- Humidity <= 37.74
+|   |   |--- Light <= 289.25
+|   |   |   |--- class: Empty
+|   |   |--- Light >  289.25
+|   |   |   |--- class: Empty
+|   |--- Humidity >  37.74
+|   |   |--- class: Occupied
+|--- Light >  365.12
+|   |--- CO2 <= 456.33
+|   |   |--- Light <= 406.17
+|   |   |   |--- class: Occupied
+|   |   |--- Light >  406.17
+|   |   |   |--- class: Empty
+|   |--- CO2 >  456.33
+|   |   |--- Temperature <= 22.21
+|   |   |   |--- class: Occupied
+|   |   |--- Temperature >  22.21
+|   |   |   |--- class: Occupied
+
+============================================================
+INTERPRETATION FOR VIVA:
+- The root decision node splits on 'Light'.
+- If Light <= threshold (~360-400 Lux), the room is almost certainly Empty.
+- If Light > threshold, secondary checks on CO2 and Temperature determine
+  whether occupants are physically present vs. lights left on by accident.
+============================================================
