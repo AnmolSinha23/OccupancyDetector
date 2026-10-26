@@ -44,8 +44,12 @@ def calculate_humidity_ratio(temperature_c, relative_humidity_pct, atmospheric_p
     return float(humidity_ratio)
 
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_MODEL_PATH = os.path.join(BASE_DIR, "outputs", "models", "occupancy_model.joblib")
+
+
 @st.cache_resource
-def load_trained_model(model_path="outputs/models/occupancy_model.joblib"):
+def load_trained_model(model_path=DEFAULT_MODEL_PATH):
     """Load the trained machine learning model from disk."""
     if not os.path.exists(model_path):
         return None
