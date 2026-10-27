@@ -80,7 +80,7 @@ def add_field(paragraph, field_text):
     r.append(fldChar2)
     r.append(fldChar3)
     run.font.name = "Calibri"
-    run.font.size = Pt(8.5)
+    run.font.size = Pt(9)
     run.font.color.rgb = BLACK
 
 
@@ -105,12 +105,12 @@ def format_table_black_text(table, col_widths, headers, data_rows, header_bg="E5
         set_cell_margins(cell, top=80, bottom=80, left=100, right=100)
         p = cell.paragraphs[0]
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        p.paragraph_format.space_before = Pt(2)
-        p.paragraph_format.space_after = Pt(2)
+        p.paragraph_format.space_before = Pt(2.5)
+        p.paragraph_format.space_after = Pt(2.5)
         run = p.add_run(title)
         run.bold = True
         run.font.name = "Calibri"
-        run.font.size = Pt(9)
+        run.font.size = Pt(9.5)
         run.font.color.rgb = BLACK
 
     # Data Rows
@@ -124,10 +124,10 @@ def format_table_black_text(table, col_widths, headers, data_rows, header_bg="E5
             cell = row.cells[c_idx]
             cell.width = Inches(col_widths[c_idx])
             set_cell_background(cell, bg_color)
-            set_cell_margins(cell, top=50, bottom=50, left=100, right=100)
+            set_cell_margins(cell, top=55, bottom=55, left=100, right=100)
             p = cell.paragraphs[0]
-            p.paragraph_format.space_before = Pt(1.5)
-            p.paragraph_format.space_after = Pt(1.5)
+            p.paragraph_format.space_before = Pt(2)
+            p.paragraph_format.space_after = Pt(2)
 
             if c_idx == 1 and ("Table" in headers[0] or "INDEX" in str(headers)):
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -140,7 +140,7 @@ def format_table_black_text(table, col_widths, headers, data_rows, header_bg="E5
 
             run = p.add_run(str(val))
             run.font.name = "Calibri"
-            run.font.size = Pt(8.5)
+            run.font.size = Pt(9.5)
             run.font.color.rgb = BLACK
             if c_idx == 0 and any(k in str(val) for k in ["Decision Tree", "All 5", "Enhanced", "Selected"]):
                 run.bold = True
@@ -173,16 +173,16 @@ def build_doc(index_page_map=None, fig_page_map=None):
     p_ft.paragraph_format.space_after = Pt(0)
     r_l = p_ft.add_run("CSE-3006: Advanced Programming Lab Report  |  ")
     r_l.font.name = "Calibri"
-    r_l.font.size = Pt(8.5)
+    r_l.font.size = Pt(9)
     r_l.font.color.rgb = BLACK
     r_p = p_ft.add_run("Page ")
     r_p.font.name = "Calibri"
-    r_p.font.size = Pt(8.5)
+    r_p.font.size = Pt(9)
     r_p.font.color.rgb = BLACK
     add_field(p_ft, "PAGE")
     r_o = p_ft.add_run(" of ")
     r_o.font.name = "Calibri"
-    r_o.font.size = Pt(8.5)
+    r_o.font.size = Pt(9)
     r_o.font.color.rgb = BLACK
     add_field(p_ft, "NUMPAGES")
 
@@ -198,15 +198,15 @@ def build_doc(index_page_map=None, fig_page_map=None):
             r_b = p.add_run(bold_prefix)
             r_b.bold = True
             r_b.font.name = "Calibri"
-            r_b.font.size = Pt(10)
+            r_b.font.size = Pt(11)
             r_b.font.color.rgb = BLACK
         r = p.add_run(text)
         r.font.name = "Calibri"
-        r.font.size = Pt(10)
+        r.font.size = Pt(11)
         r.font.color.rgb = BLACK
         return p
 
-    def add_head(title, level=1, space_before=10, space_after=3):
+    def add_head(title, level=1, space_before=11, space_after=3.5):
         h = doc.add_heading(title, level=level)
         h.paragraph_format.space_before = Pt(space_before)
         h.paragraph_format.space_after = Pt(space_after)
@@ -217,9 +217,9 @@ def build_doc(index_page_map=None, fig_page_map=None):
             r.font.color.rgb = BLACK
             r.bold = True
             if level == 1:
-                r.font.size = Pt(13)
+                r.font.size = Pt(14)
             else:
-                r.font.size = Pt(11)
+                r.font.size = Pt(12)
         return h
 
     def add_image_with_explanation(fig_path, caption_title, how_made, why_included, width_inches=5.2):
@@ -241,7 +241,7 @@ def build_doc(index_page_map=None, fig_page_map=None):
             r_cap = p_cap.add_run(caption_title)
             r_cap.bold = True
             r_cap.font.name = "Calibri"
-            r_cap.font.size = Pt(9)
+            r_cap.font.size = Pt(10)
             r_cap.font.color.rgb = BLACK
 
             # How it was made
@@ -253,11 +253,11 @@ def build_doc(index_page_map=None, fig_page_map=None):
             r_h_lbl = p_how.add_run("• How this image was made: ")
             r_h_lbl.bold = True
             r_h_lbl.font.name = "Calibri"
-            r_h_lbl.font.size = Pt(8.5)
+            r_h_lbl.font.size = Pt(9.5)
             r_h_lbl.font.color.rgb = BLACK
             r_h_txt = p_how.add_run(how_made)
             r_h_txt.font.name = "Calibri"
-            r_h_txt.font.size = Pt(8.5)
+            r_h_txt.font.size = Pt(9.5)
             r_h_txt.font.color.rgb = BLACK
 
             # Why it is included
@@ -268,11 +268,11 @@ def build_doc(index_page_map=None, fig_page_map=None):
             r_w_lbl = p_why.add_run("• Why this image is included: ")
             r_w_lbl.bold = True
             r_w_lbl.font.name = "Calibri"
-            r_w_lbl.font.size = Pt(8.5)
+            r_w_lbl.font.size = Pt(9.5)
             r_w_lbl.font.color.rgb = BLACK
             r_w_txt = p_why.add_run(why_included)
             r_w_txt.font.name = "Calibri"
-            r_w_txt.font.size = Pt(8.5)
+            r_w_txt.font.size = Pt(9.5)
             r_w_txt.font.color.rgb = BLACK
 
     # =========================================================================
