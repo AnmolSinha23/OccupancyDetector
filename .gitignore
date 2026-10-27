@@ -6,6 +6,7 @@ __pycache__/
 # Word & Document files (Requested not to upload docx files)
 *.docx
 *.doc
+*.pdf
 
 # Compressed archives
 *.zip
